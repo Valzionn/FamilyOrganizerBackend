@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FamilyOrganizerBackend.Migrations
 {
     [DbContext(typeof(FamilyOrganizerContext))]
-    [Migration("20241215152404_DeleteChores")]
-    partial class DeleteChores
+    [Migration("20241220184744_Breytingar")]
+    partial class Breytingar
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,29 @@ namespace FamilyOrganizerBackend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("FamilyOrganizerBackend.Models.CalendarEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("Time")
+                        .HasColumnType("time");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CalendarEvents");
+                });
 
             modelBuilder.Entity("FamilyOrganizerBackend.Models.Chore", b =>
                 {
@@ -47,6 +70,29 @@ namespace FamilyOrganizerBackend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Chores");
+                });
+
+            modelBuilder.Entity("FamilyOrganizerBackend.Models.Contribution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Member")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contributions");
                 });
 
             modelBuilder.Entity("FamilyOrganizerBackend.Models.DinnerPoll", b =>
@@ -125,9 +171,6 @@ namespace FamilyOrganizerBackend.Migrations
                     b.Property<int>("DinnerPollId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsFor")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Voter")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -141,13 +184,11 @@ namespace FamilyOrganizerBackend.Migrations
 
             modelBuilder.Entity("Vote", b =>
                 {
-                    b.HasOne("FamilyOrganizerBackend.Models.DinnerPoll", "DinnerPoll")
+                    b.HasOne("FamilyOrganizerBackend.Models.DinnerPoll", null)
                         .WithMany("Votes")
                         .HasForeignKey("DinnerPollId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("DinnerPoll");
                 });
 
             modelBuilder.Entity("FamilyOrganizerBackend.Models.DinnerPoll", b =>

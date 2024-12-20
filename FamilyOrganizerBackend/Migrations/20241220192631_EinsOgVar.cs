@@ -5,7 +5,7 @@
 namespace FamilyOrganizerBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class AddUsernameToUsers : Migration
+    public partial class EinsOgVar : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

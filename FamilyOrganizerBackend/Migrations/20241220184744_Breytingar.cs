@@ -5,7 +5,7 @@
 namespace FamilyOrganizerBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class FinishedShopping : Migration
+    public partial class Breytingar : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

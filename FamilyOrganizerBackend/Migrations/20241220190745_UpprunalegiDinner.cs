@@ -5,7 +5,7 @@
 namespace FamilyOrganizerBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class DeleteChores : Migration
+    public partial class UpprunalegiDinner : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
